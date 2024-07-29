@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Web Application</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="#">
+</head>
+<body>
+    <header>
+        <h1>Task Manager</h1>
+    </header>
+    <div class="container">
+        <h2>Tasks</h2>
+        <!-- Tasks will be populated here by JS -->
+         <div class="task-container">
+
+         </div>
+         <br>
+         <form id="create-task-form">
+            <label for="task-title">Title</label>
+            <input id="task-title" type="text" placeholder="title" required>
+            <br>
+            <label for="task-title">Description</label>
+            <input id="task-description" type="text" placeholder="description" required>
+            <br>
+            <label for="task-completed">Completed</label>
+            <input id="task-completed" type="checkbox" placeholder="completed">
+            <button type="submit">Add task</button>
+        </form>
+
+    </div>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
