@@ -17,6 +17,14 @@
          <div class="task-container">
 
          </div>
+
+         <div class="template-tasks">
+            <ul>
+                {{range .}}
+                <li>{{.Title}}: {{.Description}}</li>
+                {{end}}
+            </ul>
+         </div>
          <br>
          <form id="create-task-form">
             <label for="task-title">Title</label>
