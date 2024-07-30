@@ -1,3 +1,6 @@
+const _$ = document.querySelector.bind(document);
+const _$$ = document.querySelectorAll.bind(document);
+
 document.addEventListener("DOMContentLoaded", function() {
     console.log('DOM fully loaded and parsed');
 
@@ -33,6 +36,13 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             console.log('Task added:', data);
+            let taskItem = document.createElement("li");
+                taskItem.innerText = `${data.Title}: ${data.Description}`;
+
+            // append the task to the list of tasks
+           _$('.template-tasks > ul').appendChild(taskItem);
+
+
             // Optionally, you can clear the input field and update the UI
             titleInput.value = '';
             descriptionInput.value = '';
@@ -42,25 +52,25 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error('Error adding task:', error));
     };
 
-    fetch('/tasks')
-        .then(response => {
-            console.log('Fetch response:', response);
-            return response.json();
-        })
-        .then(data => {
-            console.log('Fetched data:', data);
+    // fetch('/tasks')
+    //     .then(response => {
+    //         console.log('Fetch response:', response);
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log('Fetched data:', data);
 
-            const container = document.querySelector('.task-container');
-            if (container) {
-                data.forEach(task => {
-                    console.log('Task:', task);
-                    const taskElement = document.createElement('div');
-                    taskElement.innerText = task.Title;
-                    container.appendChild(taskElement);
-                });
-            } else {
-                console.error('Container element not found');
-            }
-        })
-        .catch(error => console.error('Error fetching tasks:', error));
+    //         const container = document.querySelector('.task-container');
+    //         if (container) {
+    //             data.forEach(task => {
+    //                 console.log('Task:', task);
+    //                 const taskElement = document.createElement('div');
+    //                 taskElement.innerText = task.Title;
+    //                 container.appendChild(taskElement);
+    //             });
+    //         } else {
+    //             console.error('Container element not found');
+    //         }
+    //     })
+    //     .catch(error => console.error('Error fetching tasks:', error));
 });
