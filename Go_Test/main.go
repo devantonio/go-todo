@@ -7,6 +7,7 @@ import (
 	"go_test/routes"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -27,6 +28,9 @@ func main() {
 	router := mux.NewRouter()
 	routes.RegisterRoutes(router, taskController)
 
+	// Convert port to a string
+	portStr := strconv.Itoa(cfg.Port)
+
 	log.Println("Server starting on port", cfg.Port)
-	log.Fatal(http.ListenAndServe(":"+cfg.Port, router))
+	log.Fatal(http.ListenAndServe(":"+portStr, router))
 }
