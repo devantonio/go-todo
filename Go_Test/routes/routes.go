@@ -14,6 +14,19 @@ func RegisterRoutes(router *mux.Router, taskController *controllers.TaskControll
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		// Read the limit query parameter
+		// limitStr := r.URL.Query().Get("limit")
+		// var limit int64
+		// var err error
+
+		// if limitStr != "" {
+		// 	limit, err = strconv.ParseInt(limitStr, 10, 64)
+		// 	if err != nil {
+		// 		http.Error(w, "Invalid limit parameter", http.StatusBadRequest)
+		// 		return
+		// 	}
+		// }
+
 		// Fetch data from the database or any other source
 		tasks, err := taskController.GetTasks(2)
 		if err != nil {

@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"go_test/models"
 	"go_test/utils"
 	"log"
@@ -15,7 +16,7 @@ func (tc *TaskController) CreateTask(w http.ResponseWriter, r *http.Request) {
 	// Use the ReadAndLogBody function to read the request body from the client
 	body, err := utils.ReadBody(r)
 
-	// Log the body content
+	// Log the body content from the client
 	log.Println("Body:", string(body))
 
 	if err != nil {
@@ -37,6 +38,42 @@ func (tc *TaskController) CreateTask(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Request Spotify API
+	response, err := spotifyApiRequest()
+	if err != nil {
+		fmt.Println("Request failed while creating task:", err)
+		return
+	}
+
+	fmt.Println(response)
+
+	// Marshal the response into JSON
+	// jsonResponse, err := json.Marshal(response)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+
+	// send the task to an email
+	//utils.SendEmail("Go To", "btrflyefct@outlook.com", "A Task Was Created", "Congrats on creating your first task")
+	featuredCommentsResponse, err := getFeaturedComments()
+	if err != nil {
+		fmt.Println("Request failed while getting featured comments:", err)
+		return
+	}
+
+	// Marshal the response into JSON
+	jsonComments, err := json.Marshal(featuredCommentsResponse)
+	if err != nil {
+		fmt.Println("whoops:", err)
+		return
+	}
+	// handle featured comments
+
+	// write status and created task to the client
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(task)
+	w.Write(jsonComments)
+	//json.NewEncoder(w).Encode(task)
+	//json.NewEncoder(w).Encode(jsonResponse)
 }
