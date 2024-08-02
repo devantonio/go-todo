@@ -23,8 +23,8 @@ func LoadConfig() Config {
 	os.Setenv("PORT", "8080")
 	os.Setenv("SMTP_SERVER", "smtp.gmail.com")
 	os.Setenv("SMTP_PORT", "587")
-	os.Setenv("AUTH_EMAIL", "daq.eng.test@gmail.com")
-	os.Setenv("AUTH_PASSWORD", "axssddalmpicgcss")
+	os.Setenv("AUTH_EMAIL", "")
+	os.Setenv("AUTH_PASSWORD", "")
 
 	log.Println("DB_URI:", os.Getenv("DB_URI"))
 	log.Println("DB_NAME:", os.Getenv("DB_NAME"))
