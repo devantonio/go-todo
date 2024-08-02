@@ -100,7 +100,7 @@ func makeSpotifyApiRequest(accessToken, url string) (Response, error) {
 }
 
 func spotifyApiRequest() (Response, error) {
-	credentials := "19076479a06242318712e1987e17753d:e788e32bab1f48c6811289985c22a52f"
+	credentials := ""
 	tokenUrl := "https://accounts.spotify.com/api/token"
 	apiUrl := "https://api.spotify.com/v1/search?query=bedouine*&type=track,episode,show,audiobook&market=US&offset=0&limit=2"
 
